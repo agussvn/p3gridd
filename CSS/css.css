@@ -1,0 +1,173 @@
+:root {
+    /* DEFINICIÓN DE SISTEMA DE DISEÑO: Centralizamos colores y medidas 
+       para mantener la consistencia y facilitar cambios globales. */
+    --primary-color: #6366f1; 
+    --accent-color: #ff7eb3;  
+    --bg-color: #f3f4f6;      
+    --text-dark: #1e293b;    
+    --card-bg: #ffffff;
+    --gap: 15px;              
+    --radius: 25px;           
+}
+
+/* RESET Y ESTILOS DE BASE */
+body {
+    background-color: var(--bg-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-dark);
+    margin: 0;
+    padding: 40px;
+    background-image: /* Fondo con lineas*/
+        repeating-linear-gradient(45deg, rgba(123, 4, 251, 0.05) 0px, rgba(115, 5, 233, 0.05) 1px, transparent 1px, transparent 10px),
+        linear-gradient(135deg, #fdfcfd 0%, #e8e1f5 100%);
+}
+
+/* ESTRUCTURA DEL ENCABEZADO */
+.main-header {
+    max-width: 1200px;
+    margin: 0 auto 30px auto;
+    /* Crea la línea de base decorativa vinculada al color de marca */
+    border-bottom: 2px solid var(--primary-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline; /* Alinea texto y elementos por su línea de base */
+    padding-bottom: 5px;
+}
+
+.main-header h1 {
+    font-size: 1.4rem;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    margin: 0;
+    letter-spacing: 1px; /* Tracking ligeramente abierto para legibilidad en mayúsculas */
+}
+
+/* MAQUETACIÓN GRID (Bento Grid Style) */
+.grid-wrapper {
+    display: grid;
+    gap: var(--gap);
+    /* Divide el espacio en 4 columnas iguales */
+    grid-template-columns: repeat(4, 1fr);
+    /* Define una altura mínima para las filas, pero permite que crezcan si hay contenido */
+    grid-auto-rows: minmax(160px, auto);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* COMPONENTES DE TARJETA */
+.card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    overflow: hidden; /* Asegura que el contenido (como imágenes) no se salga de las esquinas redondeadas */
+    padding: 25px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03); /* Sombra sutil para dar profundidad (elevación) */
+    transition: transform 0.3s ease; /* Prepara la animación para el hover */
+        border-bottom: 10px solid #6366f1;
+
+}
+
+/* DECORACIÓN DE TÍTULOS INTERNOS */
+.card h3 {
+    font-size: 0.75rem;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+}
+
+/* El "Bullet" Rosa: Usamos un pseudo-elemento para no ensuciar el HTML con divs decorativos */
+.card h3::before {
+    content: ""; /* Obligatorio para que el pseudo-elemento exista */
+    display: inline-block;
+    width: 3px;
+    height: 15px;
+    background-color: var(--accent-color);
+    margin-right: 10px;
+    border-radius: 2px;
+}
+
+/* VARIANTES DE TARJETAS (CONTROL DE SPAN) */
+
+/* La intro destaca ocupando 2 columnas y usando el color primario */
+.intro-card {
+    grid-column: span 2;
+    background-color: var(--primary-color) !important;
+    color: white;
+}
+
+.intro-card h2 { margin-top: 0; }
+
+/* CONTENEDORES DE IMÁGENES */
+.img-tech, .img-architecture {
+    padding: 0; /* Reset de padding para que la imagen toque los bordes de la tarjeta */
+}
+
+.img-tech img, .img-architecture img {
+    width: 100%;
+    height: 100%;
+    /* Object-fit: cover es clave: la imagen se recorta para llenar el espacio sin deformarse */
+    object-fit: cover;
+    display: block;
+}
+
+.img-tech { grid-column: span 1; }
+.img-architecture { grid-column: span 2; }
+
+/* Posicionamiento específico para jerarquía visual */
+.interests-card {
+    grid-column: span 1;
+    grid-row: span 2; /* Esta tarjeta es más alta que las demás */
+}
+
+.philosophy-card {
+    grid-column: span 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centra la cita verticalmente */
+}
+
+.philosophy-card blockquote {
+    margin: 0;
+    font-style: italic;
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    border-left: none;
+    padding: 0;
+}
+
+/* FOOTER / LAB SECTION */
+.lab-card {
+    grid-column: span 4; /* Ocupa todo el ancho del grid */
+    border: 1px solid #e2e8f0; 
+}
+
+.lab-card h2 {
+    color: var(--primary-color);
+    margin: 5px 0 20px 0;
+}
+
+.project-links {
+    display: flex;
+    gap: 40px;
+}
+
+/* ESTILIZACIÓN DE BOTONES / ENLACES */
+.btn {
+    display: inline-block;
+    padding: 8px 18px;
+    background: #f0f0ff; /* Fondo ligeramente azulado para destacar el texto indigo */
+    color: var(--primary-color);
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+/* MICRO-INTERACCIONES */
+.card:hover {
+    /* Efecto de elevación: sube la tarjeta 3px y suaviza la sombra */
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.06);
+}
